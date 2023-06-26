@@ -4,6 +4,8 @@
     <title>Video Detail</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="https://vjs.zencdn.net/7.15.0/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.15.0/video.js"></script>
 </head>
 
 <body>
@@ -30,25 +32,29 @@
         </header>
         <div class="row">
             <div class="col-md-16">
-                <div id="player"></div>
+                <div id="player">
+                    <div class="col-md-16">
+                        <video
+                            id="player"
+                            class="video-js vjs-default-skin"
+                            controls
+                            preload="auto"
+                            width="640"
+                            height="360"
+                            data-setup="{}"
+                        >
+                            <source src="https://testvideostreaming-jjh.s3.ap-northeast-2.amazonaws.com/testvideo.mp4" type="video/mp4">
+                        </video>
+
+                </div>
             </div>
         </div>
     </div>
+
+    
+
 </body>
 
-<script>
-    var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            videoId: '{{ video.video_key }}'
-        });
-    }
-</script>
 
 </html>

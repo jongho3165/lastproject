@@ -133,7 +133,7 @@ LOGIN_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AWS_REGION = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'test-video-bucket-gtth'
+AWS_STORAGE_BUCKET_NAME = 'testvideostreaming-jjh'
 AWS_ACCESS_KEY_ID = 'AKIAUZTZAKA2PBZZ7ADX'
 AWS_SECRET_ACCESS_KEY = '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'
 
