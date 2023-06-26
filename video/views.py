@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 from django.db.models import Count
 from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
-from video.models import Picture
+
 
 
 
@@ -30,18 +30,14 @@ def video_category(request, category):
 @login_required
 def video_new(request):
     if request.method == 'POST': # 새로운 비디오 데이터를 업로드할 때
-
-        images = request.FILES.getlist("video_key")
-        for image in images:
-            picture = Picture()
-            picture.img = image
-            picture.save()
-
         form = VideoForm(request.POST)
         if form.is_valid():
             video = form.save(commit=False) # 받은 데이터를 바로 Video모델에 저장하지 말기
             video.author = request.user # author 추가
-            video.save() # 변경사항 저장
+            images = request.FILES.getlist("video_key")
+            for image in images:
+                video.Videofile = image
+                video.save() # 변경사항 저장
             return redirect('video_list')
         else:
             return HttpResponse(form.errors.values())

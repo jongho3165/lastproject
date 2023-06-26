@@ -1,30 +1,21 @@
 from django.conf import settings
 from django.db import models
-
-class Picture(models.Model):
-    img = models.ImageField(upload_to="", blank=True)
-
+import uuid
 class Video(models.Model):
+
+    Videofile = models.ImageField(upload_to=str(uuid.uuid4()), default=None, blank=True, null=True)
 
     class Category(models.TextChoices):
         Music = 'music'
         Movie = 'movie'
         Drama = 'drama'
-        Comedy = 'comedy'
-        Information = 'info'
-        Daily = 'daily'
-        Beauty = 'beauty'
-        Art = 'art'
-        Book = 'book'
-        Sport = 'sport'
-        Food = 'food'
-
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    video_key = models.CharField(max_length=12)
-    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user')
-    upload_date = models.DateTimeField(auto_now_add=True, null=True) # first created date
-    category = models.TextField(choices=Category.choices, blank=True)
+       
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    video_key = models.CharField(max_length=12, null=True, blank=True)
+    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='likes_user')
+    upload_date = models.DateTimeField(auto_now_add=True, null=True, blank=True) # first created date
+    category = models.TextField(choices=Category.choices, blank=True, null= True)
 
     class Meta:
         ordering = ['-upload_date']
